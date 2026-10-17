@@ -1,5 +1,10 @@
 import { Redis } from '@upstash/redis';
-import { env } from '$env/dynamic/private';
+import {
+	KV_REST_API_TOKEN,
+	KV_REST_API_URL,
+	UPSTASH_REDIS_REST_TOKEN,
+	UPSTASH_REDIS_REST_URL
+} from '$app/env/private';
 
 /**
  * Upstash Redis のクライアント。
@@ -14,8 +19,8 @@ export function getRedis(): Redis | null {
 	if (cached !== undefined) return cached;
 
 	// Vercel Marketplace 経由だと KV_*、Upstash コンソール直だと UPSTASH_* になる
-	const url = env.KV_REST_API_URL || env.UPSTASH_REDIS_REST_URL;
-	const token = env.KV_REST_API_TOKEN || env.UPSTASH_REDIS_REST_TOKEN;
+	const url = KV_REST_API_URL || UPSTASH_REDIS_REST_URL;
+	const token = KV_REST_API_TOKEN || UPSTASH_REDIS_REST_TOKEN;
 
 	if (!url || !token) {
 		cached = null;

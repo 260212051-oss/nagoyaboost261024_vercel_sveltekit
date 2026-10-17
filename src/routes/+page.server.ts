@@ -1,6 +1,6 @@
-import { drawOmikuji } from '$lib/server/omikuji';
-import { listRecords, saveRecord } from '$lib/server/omikuji-store';
-import { isRedisConfigured } from '$lib/server/redis';
+import { drawOmikuji } from '#lib/server/omikuji';
+import { listRecords, saveRecord } from '#lib/server/omikuji-store';
+import { isRedisConfigured } from '#lib/server/redis';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals }) => {

@@ -1,8 +1,8 @@
-import { env } from '$env/dynamic/private';
+import { OMIKUJI_HISTORY_LIMIT } from '$app/env/private';
 import { getRedis } from './redis';
-import type { OmikujiRecord, OmikujiResult } from '$lib/types';
+import type { OmikujiRecord, OmikujiResult } from '#lib/types';
 
-const HISTORY_LIMIT = Number(env.OMIKUJI_HISTORY_LIMIT ?? '50') || 50;
+const HISTORY_LIMIT = OMIKUJI_HISTORY_LIMIT;
 
 /** ユーザーごとの履歴キー。将来ユーザー認証を入れてもキー設計は変えずに済む。 */
 const historyKey = (userId: string) => `omikuji:history:${userId}`;

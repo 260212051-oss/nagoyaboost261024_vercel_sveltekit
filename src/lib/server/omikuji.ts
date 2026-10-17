@@ -1,4 +1,4 @@
-import type { FortuneRank, OmikujiResult } from '$lib/types';
+import type { FortuneRank, OmikujiResult } from '#lib/types';
 
 interface FortuneDef {
 	rank: FortuneRank;

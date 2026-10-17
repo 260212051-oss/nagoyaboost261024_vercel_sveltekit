@@ -15,7 +15,9 @@ SvelteKit (Svelte 5) 製のおみくじアプリ。Vercel に SSR でデプロ�
 
 ## SSR について
 
-- `adapter-vercel`（`nodejs22.x`）を使用し、Vercel の Serverless Function 上で SSR します。
+- アダプタは [vite.config.js](vite.config.js) で `adapter-auto` を指定。Vercel にデプロイすると自動的に `adapter-vercel` が解決され、Serverless Function 上で SSR します。
+  - ランタイムの固定（`nodejs22.x` 指定など）やローカルでの `.vercel/output` 生成が必要になったら `@sveltejs/adapter-vercel` に差し替えてください。
+  - ローカルの `npm run build` では環境を検出できず `Could not detect a supported production environment` と出ますが、`adapter-auto` の仕様どおりで異常ではありません。
 - [+layout.server.ts](src/routes/+layout.server.ts) で `ssr = true` / `prerender = false` を明示。
 - 抽選も保存も `+page.server.ts` の form action 内で完結するため、クライアント JS が無効でも動作します。
 
@@ -34,6 +36,10 @@ KV_REST_API_TOKEN=...
 
 Vercel Marketplace から Upstash を連携すると `KV_REST_API_*` が自動注入されます。
 Upstash コンソールから直接コピーする場合は `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` でも可。
+
+> **注意**: SvelteKit 3 では環境変数を [src/env.ts](src/env.ts) で明示的に宣言しないとアプリから読めません。
+> 変数を増やすときは `.env` だけでなく `src/env.ts` の `defineEnvVars` にも追加してください。
+> 読み出しは `$app/env/private` から（`$env/dynamic/private` は非推奨）。
 
 ### キー設計
 
