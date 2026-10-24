@@ -8,11 +8,15 @@
 		{ href: '/', label: 'おみくじ' },
 		{ href: '/history', label: 'おみくじ記録' }
 	];
+
+	const logoUrl = '【https://umkgyblodtdnqocc.public.blob.vercel-storage.com/omikuji_image/omikuji_image.png】';
 </script>
 
 <div class="shell">
 	<header>
-		<a class="brand" href="/">⛩ おみくじ</a>
+		<a class="brand" href="/">
+			<img src={logoUrl} alt="おみくじ" width="1254" height="1254" />
+		</a>
 		<nav>
 			{#each nav as item (item.href)}
 				<a href={item.href} aria-current={page.url.pathname === item.href ? 'page' : undefined}>
@@ -50,10 +54,15 @@
 	}
 
 	.brand {
-		font-weight: 700;
-		font-size: 1.1rem;
+		display: inline-flex;
 		text-decoration: none;
 		color: var(--fg);
+	}
+
+	.brand img {
+		display: block;
+		width: auto;
+		height: 2.75rem;
 	}
 
 	nav {
